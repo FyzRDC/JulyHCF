@@ -1,0 +1,7 @@
+name: JulyHCF
+version: 1.0
+main: fr.fyz.hcf.Main
+author: [Fyz, MaxWgamer]
+commands:
+  f:
+  faction:
