@@ -3,10 +3,13 @@ package fr.fyz.hcf.faction;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.OfflinePlayer;
 
 import fr.MaxWgamer.julyapi.Account;
 import fr.MaxWgamer.julyapi.bukkit.JulyAPIBukkit;
+import fr.MaxWgamer.julyapi.managers.FactionRank;
 import fr.fyz.hcf.faction.json.ListJSON;
 
 public class Faction {
@@ -37,6 +40,15 @@ public class Faction {
 	
 	public int getBank() {
 		return bank;
+	}
+	
+	public void sendMessageToEveryone(String message) {
+		for(UUID uuid : players) {
+			OfflinePlayer p = Bukkit.getOfflinePlayer(uuid);
+			if(p.isOnline()) {
+				p.getPlayer().sendMessage(message);
+			}
+		}
 	}
 	
 	public void setBank(int bank) {
@@ -86,10 +98,11 @@ public class Faction {
 		return players;
 	}
 	
-	public void addPlayer(UUID p) {
+	public void addPlayer(UUID p, FactionRank rank) {
 		players.add(p);
 		Account acc = JulyAPIBukkit.getInstance().getAccount(p);
 		acc.setFactionId(this.uuid);
+		acc.setFactionRank(rank);
 	}
 	
 	public void removePlayer(UUID p) {

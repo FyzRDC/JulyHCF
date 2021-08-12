@@ -6,21 +6,28 @@ import org.bukkit.Chunk;
 
 import fr.MaxWgamer.julyapi.Account;
 import fr.MaxWgamer.julyapi.bukkit.JulyAPIBukkit;
+import fr.MaxWgamer.julyapi.managers.FactionRank;
 import fr.fyz.hcf.faction.json.ListJSON;
 
 public class FactionManager {
 	
+	
 	public static void createFaction(Faction f) {
 		
-		JulyAPIBukkit.getInstance().getMySQL().update("INSERT INTO factions (uuid, name, description, players) VALUES ('"+f.getUUID()+"','"+f.getName()+"','"+f.getDesc()+"','"+f.getSerializedPlayers());
+		JulyAPIBukkit.getInstance().getMySQL()
+		.update("INSERT INTO factions (uuid, name, description, players, claims) VALUES "
+				+ "('"+f.getUUID()+"','"+f.getName()+"','"+f.getDesc()+"','"+f.getSerializedPlayers()+"','"+f.getSerializedClaims()+"'");
 	}
 	
 	public static void updateFaction(Faction f) {
-		JulyAPIBukkit.getInstance().getMySQL().update("UPDATE 'factions' WHERE 'uuid' = "+f.getUUID()+" SET (name, description, players) ("+f.getName());
+		JulyAPIBukkit.getInstance().getMySQL().update("UPDATE 'factions' WHERE 'uuid' = "+f.getUUID()+" SET (name, description, players, claims) ('"+f.getName()+"','"+f.getDesc()+"','"+f.getSerializedPlayers()+"','"+f.getSerializedClaims()+"'");
 	}
 	
 	public static Faction getFactionByPlayer(UUID p) {
 		Account acc = JulyAPIBukkit.getInstance().getAccount(p);
+		if(acc.getFactionId() == null) {
+			return null;
+		}
 		return getFactionByUUID(acc.getFactionId());
 	}
 	
@@ -30,7 +37,6 @@ public class FactionManager {
 				if(rs.next()) {
 					return new Faction(UUID.fromString(rs.getString("uuid")), rs.getString("name"), rs.getString("description"), rs.getInt("bank"), new ListJSON<UUID>().deserialize(rs.getString("players")), new ListJSON<Chunk>().deserialize(rs.getString("claims")));
 				}
-				rs.close();
 				return null;
 				
 			}catch(Exception e) {
@@ -54,6 +60,7 @@ public class FactionManager {
 		}
 		Account acc = JulyAPIBukkit.getInstance().getAccount(p);
 		acc.setFactionId(f);
+		acc.setFactionRank(FactionRank.MEMBER);
 	}
 
 }

@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 
 public enum CommandConditions {
 	
-	LIST(0, 1, ""),
 	INFO(0, 1, ""),
 	JOIN(0, 2, "<faction>"),
 	LEAVE(0, 1, ""),
@@ -16,6 +15,8 @@ public enum CommandConditions {
 	NAME(3, 2, "<new name>"),
 	DESC(3, 2, "<desc>"),
 	SETHOME(2, 1, ""),
+	OPEN(2, 1, ""),
+	CLOSE(2, 1, ""),
 	UNSETHOME(2, 1, ""),
 	KICK(2, 2, "<player>"),
 	PROMOTE(3, 2, "<player>"),

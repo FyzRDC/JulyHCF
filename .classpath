@@ -18,6 +18,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Java Build Path/Spigot July.jar"/>
-	<classpathentry kind="lib" path="C:/Java Build Path/JulyAPI-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fyz/git/JulyAPI/target/JulyAPI-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
