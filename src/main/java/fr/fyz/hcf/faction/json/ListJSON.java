@@ -2,8 +2,8 @@ package fr.fyz.hcf.faction.json;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
+import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 
 
 public class ListJSON<T extends Object> {
